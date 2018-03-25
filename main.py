@@ -7,7 +7,6 @@ from colors import Color
 import qclock
 from utils import zipmul
 
-#from pymaze import MazeGenerator
 try:
     from lib_mazegen import MazeGenerator
 except ImportError:
