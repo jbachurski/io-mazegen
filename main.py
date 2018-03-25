@@ -7,13 +7,10 @@ from colors import Color
 import qclock
 from utils import zipmul
 
-try:
-    from lib_mazegen import MazeGenerator
-except ImportError:
-    from pymaze import MazeGenerator
+from lib_mazegen import MazeGenerator
 
-WIDTH   = 177
-HEIGHT  = 100
+WIDTH   = 70
+HEIGHT  = 70
 BLOCK_SIZE = 10
 INTERVAL = 0
 

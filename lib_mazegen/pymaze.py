@@ -57,16 +57,11 @@ class MazeGenerator:
         for d in dirs:
             cur = zipsum(t, d)
             cx, cy = cur
-            if 0 <= cx < self.width and 0 <= cy < self.height and \
-                not any((cx == 0 and 0 <= cy < self.height, 
-                         cx == self.width - 1 and 0 <= cy < self.height, 
-                         cy == 0 and 0 <= cx < self.width, 
-                         cy == self.width - 1 and 0 <= cx < self.width)):
+            if 0 < cx < self.width - 1 and 0 < cy < self.height - 1:
                 result.append(cur)
             elif with_ends and cur in (self.start_pos, self.end_pos):
                 result.append(cur)
         return result
-
 
     def next_to_diag(self, x, y, with_ends=False):
         return self.next_to(x, y, DIRS_DIAG, with_ends)
@@ -74,14 +69,14 @@ class MazeGenerator:
     def create_ends(self):
         pair = []
         used_walls = []
-        while len(pair) != 2:
+        while len(pair) < 2:
             wall = random.choice("udlr")
             if wall in used_walls: continue
             else: used_walls.append(wall)
-            if wall == "l": pair.append((0, random.randint(1, self.width - 2)))
-            if wall == "r": pair.append((self.width - 1, random.randint(1, self.width - 2)))
-            if wall == "u": pair.append((random.randint(1, self.height - 2), 0))
-            if wall == "d": pair.append((random.randint(1, self.height - 2), self.width - 1))
+            if wall == "l": pair.append((0, random.randint(1, self.height - 2)))
+            if wall == "r": pair.append((self.width - 1, random.randint(1, self.height - 2)))
+            if wall == "u": pair.append((random.randint(1, self.width - 2), 0))
+            if wall == "d": pair.append((random.randint(1, self.width - 2), self.height - 1))
         self.start_pos, self.end_pos = pair
         self.data[self.start_pos[1]][self.start_pos[0]] = 2
         self.data[self.end_pos[1]][self.end_pos[0]] = 3
@@ -110,7 +105,6 @@ class MazeGenerator:
             next_to = self.next_to(cx, cy)
             next_to_all = next_to + next_to_d
             part_next_d = sum(not self.data[n[1]][n[0]] for n in next_to_all)
-            
             if part_next_d <= self.sparsiness:
                 self.data[cy][cx] = 0
                 changed.append(current)

@@ -1,6 +1,6 @@
 import warnings
 
-assert __name__ != "__main__", "This script will not work correctly if run directly"
+assert __name__ != "__main__", "This script will not work correctly if ran directly"
 
 use_cython = use_pyximport = use_python = False
 

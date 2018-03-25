@@ -136,10 +136,10 @@ cdef class MazeGenerator:
             wall = randint(0, 3)
             if wall in used_walls: continue
             else: used_walls.append(wall)
-            if wall == 0:   pair.append((0, randint(1, self.width - 2)))
-            elif wall == 1: pair.append((self.width - 1, randint(1, self.width - 2)))
-            elif wall == 2: pair.append((randint(1, self.height - 2), 0))
-            elif wall == 3: pair.append((randint(1, self.height - 2), self.width - 1))
+            if wall == 0:   pair.append((0, randint(1, self.height - 2)))
+            elif wall == 1: pair.append((self.width - 1, randint(1, self.height - 2)))
+            elif wall == 2: pair.append((randint(1, self.width - 2), 0))
+            elif wall == 3: pair.append((randint(1, self.width - 2), self.height - 1))
         self.start_pos, self.end_pos = pair
         self.data[self.start_pos[1]][self.start_pos[0]] = 2
         self.data[self.end_pos[1]][self.end_pos[0]] = 3
